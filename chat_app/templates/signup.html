@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row justify-content-sm-center">
+        <div class="col col-lg-4">
+            <h1 align="center">Sign Up Page</h1>
+            <div class="row"></div>
+            {% with warnings = get_flashed_messages() %}
+            {% if warnings %}
+            <div class="alert alert-danger">
+                {{ warnings[0] }}
+            </div>
+            {% endif %}
+            {% endwith %}
+            <form method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="nickname" id="nickname" placeholder="NickName">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="password" name="password" placeholder="Password">
+                </div>
+                <div class="row justify-content-sm-center">
+                    <div class="col col-lg-6">
+                        <button type="submit" class="btn btn-dark btn-block">Sign Up</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,22 +1,23 @@
-from flask import Flask, render_template, request, redirect, url_for, session
-from flask_socketio import SocketIO, send, emit
-from config import SECRET_KEY
-from views import view
+from flask_socketio import SocketIO
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = SECRET_KEY
-app.register_blueprint(view)
+from chat_app import create_app, db
+from chat_app.models import Message
+
+app = create_app()
 socketio = SocketIO(app)
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
     socketio.run(app, debug=True, host='0.0.0.0')
 
 
 @socketio.on('event')
 def handle_my_custom_event(json, methods=['GET', 'POST']):
-    print('received json: ' + str(json))
+    data = dict(json)
+    if "current_user" in data:
+        message = Message(text=data.get('message'), author_id=data.get('current_user', {}).get('id'), chat_id=1)
+        db.session.add(message)
+        db.session.commit()
 
     socketio.emit('message response', json)
 

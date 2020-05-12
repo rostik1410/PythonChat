@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: mediumseagreen;
+}
+
+.chat{
+    margin-top: 20px;
+    background: lightblue;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.chat li {
+    list-style: none;
+}
